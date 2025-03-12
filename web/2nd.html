@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WovenSackEDU</title>
+    <link rel="stylesheet" href="2nd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">WovenSackEDU</div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li class="has-dropdown">
+                    <a href="#market">Market Insights <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#market-overview">Market Overview</a></li>
+                        <li><a href="#market-trends">Industry Trends</a></li>
+                        <li><a href="#market-analysis">Price Analysis</a></li>
+                        <li><a href="#market-news">Latest News</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#login" id="login-link">Login</a></li>
+                <li><button id="darkModeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Woven sack Education HUB</h1>
+            <p>Transform Your Career with Our Advanced Solutions</p>
+            <a href="#products" class="btn">Explore Products <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section id="market" class="market-section">
+        <h2 data-aos="fade-up">Woven Sack Market Insights</h2>
+        
+        <div class="market-container">
+            <div id="market-overview" class="market-card" data-aos="fade-up">
+                <div class="market-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Market Overview</h3>
+                <div class="market-stats">
+                    <div class="stat">
+                        <span class="value">$4.5B</span>
+                        <span class="label">Market Size by 2025</span>
+                    </div>
+                    <div class="stat">
+                        <span class="value">8.5%</span>
+                        <span class="label">Annual Growth Rate</span>
+                    </div>
+                </div>
+                <p>The global woven sacks market continues to expand, driven by:</p>
+                <ul class="market-list">
+                    <li>Growing agricultural sector demand</li>
+                    <li>Rising construction industry needs</li>
+                    <li>Increasing industrial packaging requirements</li>
+                    <li>Emerging market opportunities</li>
+                </ul>
+            </div>
+
+            <div id="market-trends" class="market-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="market-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3>Industry Trends</h3>
+                <div class="trend-container">
+                    <div class="trend-item">
+                        <i class="fas fa-leaf"></i>
+                        <h4>Sustainability</h4>
+                        <p>Eco-friendly materials and recyclable solutions gaining traction</p>
+                    </div>
+                    <div class="trend-item">
+                        <i class="fas fa-robot"></i>
+                        <h4>Automation</h4>
+                        <p>Advanced manufacturing processes and smart technology integration</p>
+                    </div>
+                    <div class="trend-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Quality Standards</h4>
+                        <p>Enhanced focus on product quality and certification</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="market-analysis" class="market-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="market-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h3>Price Analysis</h3>
+                <div class="price-chart">
+                    <div class="chart-header">
+                        <h4>Raw Material Price Trends</h4>
+                        <select id="timeRange" class="chart-select">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                    <div class="price-factors">
+                        <div class="factor">
+                            <i class="fas fa-arrow-up up"></i>
+                            <span>PP Granules: ₹120/kg</span>
+                        </div>
+                        <div class="factor">
+                            <i class="fas fa-arrow-down down"></i>
+                            <span>HDPE: ₹95/kg</span>
+                        </div>
+                        <div class="factor">
+                            <i class="fas fa-minus stable"></i>
+                            <span>Labor Cost: Stable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="market-news" class="market-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="market-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3>Latest News</h3>
+                <div class="news-filter">
+                    <button class="news-tab active" data-category="all">All</button>
+                    <button class="news-tab" data-category="industry">Industry</button>
+                    <button class="news-tab" data-category="technology">Technology</button>
+                    <button class="news-tab" data-category="policy">Policy</button>
+                </div>
+                <div class="news-ticker">
+                    <ul>
+                        <li class="news-item industry">
+                            <span class="news-date">Today</span>
+                            <p>New sustainable materials revolutionizing the woven sack industry</p>
+                        </li>
+                        <li class="news-item technology">
+                            <span class="news-date">Yesterday</span>
+                            <p>AI-powered quality control systems boost production efficiency</p>
+                        </li>
+                        <li class="news-item policy">
+                            <span class="news-date">2 days ago</span>
+                            <p>Government announces new recycling guidelines for packaging industry</p>
+                        </li>
+                        <li class="news-item industry">
+                            <span class="news-date">3 days ago</span>
+                            <p>Global supply chain updates and their impact on market prices</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="market-regions" class="market-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="market-icon">
+                    <i class="fas fa-globe-asia"></i>
+                </div>
+                <h3>Regional Markets</h3>
+                <div class="region-grid">
+                    <div class="region-item">
+                        <h4>Asia Pacific</h4>
+                        <div class="region-stat">
+                            <span class="value">45%</span>
+                            <span class="label">Market Share</span>
+                        </div>
+                        <p>Largest market with rapid industrial growth</p>
+                    </div>
+                    <div class="region-item">
+                        <h4>Europe</h4>
+                        <div class="region-stat">
+                            <span class="value">25%</span>
+                            <span class="label">Market Share</span>
+                        </div>
+                        <p>Focus on sustainable solutions</p>
+                    </div>
+                    <div class="region-item">
+                        <h4>North America</h4>
+                        <div class="region-stat">
+                            <span class="value">20%</span>
+                            <span class="label">Market Share</span>
+                        </div>
+                        <p>Advanced technology adoption</p>
+                    </div>
+                    <div class="region-item">
+                        <h4>Others</h4>
+                        <div class="region-stat">
+                            <span class="value">10%</span>
+                            <span class="label">Market Share</span>
+                        </div>
+                        <p>Emerging opportunities</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="market-forecast" class="market-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="market-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Market Forecast</h3>
+                <div class="forecast-content">
+                    <div class="forecast-header">
+                        <h4>Growth Projections 2023-2025</h4>
+                        <div class="forecast-legend">
+                            <span><i class="fas fa-circle demand"></i> Demand</span>
+                            <span><i class="fas fa-circle supply"></i> Supply</span>
+                        </div>
+                    </div>
+                    <div class="forecast-stats">
+                        <div class="forecast-item">
+                            <span class="label">Expected CAGR</span>
+                            <span class="value">8.5%</span>
+                        </div>
+                        <div class="forecast-item">
+                            <span class="label">Market Volume</span>
+                            <span class="value">2.5M Tons</span>
+                        </div>
+                        <div class="forecast-item">
+                            <span class="label">Revenue Growth</span>
+                            <span class="value">12%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <h2 data-aos="fade-up">Learn and grow the career</h2>
+        <div class="product-cards">
+            <div class="card" data-aos="fade-up">
+                <div class="card-image">
+                    <img src="loom.jpeg" alt="Loom Formula">
+                    <div class="card-overlay">
+                        <button class="btn buy-btn" onclick="buyProduct('Loom Formula')">
+                            <span>Buy Now</span>
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3>Loom Formula</h3>
+                <p>Optimize your production with our advanced Loom formula.</p>
+                <div class="price">999</div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-image">
+                    <img src="tape plant_02.jpeg" alt="Tape Plant Formula">
+                    <div class="card-overlay">
+                        <button class="btn buy-btn" onclick="buyProduct('Tape Plant Formula')">
+                            <span>Buy Now</span>
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3>Tape Plant Formula</h3>
+                <p>Enhance your plant's productivity with this unique formula.</p>
+                <div class="price">1499</div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-image">
+                    <img src="lab.jpeg" alt="Quality Inspection">
+                    <div class="card-overlay">
+                        <button class="btn buy-btn" onclick="buyProduct('Quality Inspection')">
+                            <span>Buy Now</span>
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3>Quality Inspection</h3>
+                <p>Ensure the highest standards with our quality inspection formula.</p>
+                <div class="price">1999</div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-image">
+                    <img src="advance calculation.jpeg" alt="Advanced Formula">
+                    <div class="card-overlay">
+                        <button class="btn buy-btn" onclick="buyProduct('Advanced Formula')">
+                            <span>Buy Now</span>
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3>Advanced Formula</h3>
+                <p>Unlock the potential of your business with this cutting-edge solution.</p>
+                <div class="price">2499</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2 data-aos="fade-up">What Our Students Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial" data-aos="fade-right">
+                <div class="testimonial-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"The Loom Formula course transformed my understanding of woven sack production. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                        <div>
+                            <h4>John Doe</h4>
+                            <p>Production Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial" data-aos="fade-left">
+                <div class="testimonial-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"Quality Inspection course helped me implement better quality control measures in our facility."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Jane Smith">
+                        <div>
+                            <h4>Jane Smith</h4>
+                            <p>Quality Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+            <h2>About Us</h2>
+            <p>Woven Sack Education is dedicated to providing high-quality education and training in the field of woven sack manufacturing and design. Our courses are designed to help you gain the skills and knowledge needed to excel in this industry.</p>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <h3>1000+</h3>
+                    <p>Students Trained</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-certificate"></i>
+                    <h3>50+</h3>
+                    <p>Courses</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-industry"></i>
+                    <h3>100+</h3>
+                    <p>Industry Partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 data-aos="fade-up">Contact Us</h2>
+        <p data-aos="fade-up">If you have any queries, feel free to contact us below:</p>
+        
+        <div class="contact-container" data-aos="fade-up">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <p>wovensackhub@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+91 XXX XXX XXXX</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Location</h3>
+                        <p>India</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="contactForm" data-aos="fade-up">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="Subject" required>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your Message" required rows="5"></textarea>
+                    <span class="error-message"></span>
+                </div>
+                <button type="submit" class="btn">
+                    <span class="button-text">Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                    <div class="button-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>WovenSackEDU</h3>
+                <p>Transforming careers in the woven sack industry through quality education.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-media">
+                    <a href="https://www.facebook.com/profile.php?id=100085866979764" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/raghavendrakumarverma" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/raghavendra-kumar-797ba3245" target="_blank" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 WovenSackEDU. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-container">
+                <div class="auth-header">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="register">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <h2>Welcome Back!</h2>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <i class="fas fa-eye-slash password-toggle"></i>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group remember-forgot">
+                        <label class="remember">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn auth-btn">
+                        <span class="button-text">Login</span>
+                        <div class="button-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                    <div class="social-login">
+                        <p>Or login with</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i>
+                                Google
+                            </button>
+                            <button type="button" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form">
+                    <h2>Create Account</h2>
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="registerName" placeholder="Enter your full name" required>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="registerPassword" placeholder="Enter your password" required>
+                            <i class="fas fa-eye-slash password-toggle"></i>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye-slash password-toggle"></i>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="terms">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span>I agree to the <a href="#">Terms & Conditions</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn auth-btn">
+                        <span class="button-text">Register</span>
+                        <div class="button-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="forgotPasswordForm" class="auth-form">
+                <h2>Reset Password</h2>
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <div class="form-group">
+                    <label for="resetEmail">Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="resetEmail" placeholder="Enter your email" required>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+                <button type="submit" class="btn auth-btn">
+                    <span class="button-text">Send Reset Link</span>
+                    <div class="button-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="2nd.js"></script>
+</body>
+</html>
